@@ -2,6 +2,7 @@ import React from 'react'
 import MuiTableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from  '@mui/material/TableCell';
+import {Link} from "react-router-dom";
 
 
 function TableBody({countries}) {
@@ -13,7 +14,8 @@ function TableBody({countries}) {
        <TableCell>
         <img src = {country.flags.png} alt= "flag" />
         </TableCell>
-        <TableCell>{country.name.common}</TableCell>
+        <TableCell>
+          <Link to= {"/country/" + country.name.common}>{country.name.common}</Link></TableCell>
         <TableCell>{country.region}</TableCell>
         <TableCell>
           {country.languages && Object.keys(country.languages).length >0 

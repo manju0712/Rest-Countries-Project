@@ -10,6 +10,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box'
 
 
 
@@ -24,13 +25,24 @@ function Countrypage() {
     if(!country)
     { return <p>Loading...</p> }
   return (
+ <Box
+      sx={{
+        width: '100%',
+        maxWidth: 650,
+        border: 1,
+      }}
+    >
 
-     <Card
-      sx={{ maxWidth: 345 }}>
+
+     <Card variant="outlined"> 
+  
          <CardMedia
           component="img"
-        height="140"
-          img src = {country.flags.png} alt= "flag"/>
+          height = "20"
+          width = "20"
+          img src = {country.flags.png} style={{ width: '100px' }}  alt= "flag"/>
+           <Button size="small">
+                <Link to ="/">Back to home</Link></Button>
           
          <CardContent>
              <Typography gutterBottom variant="h5" component="div">Country Name :{country.name.common}
@@ -45,10 +57,10 @@ function Countrypage() {
            ? Object.values(country.currencies).map((x) => x.name).join(','):"N/A" }</Typography>
         </CardContent>
         <CardActions>
-            <Button size="small">
-                <Link to ="/">Back to home</Link></Button>
+           
         </CardActions>
       </Card>
+      </Box>
   )
 }
 

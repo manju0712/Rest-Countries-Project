@@ -5,7 +5,7 @@ import MuiTableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 
-const columns = ['flag' ,'name' , 'region', 'population', 'capital']
+const columns = ['Flag' ,'Name' , 'Region', 'Population', 'Capital']
 
 function TableHead() {
   return (

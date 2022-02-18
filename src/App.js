@@ -11,11 +11,9 @@ function App() {
   return (
     <div className= 'App'>
       <Routes>
-
         <Route path = "/" element={<CountryTable />}/>
         <Route path ="/country/:name" element={<CountryPage />}/>
       </Routes>
-  
     </div>
   );
 }

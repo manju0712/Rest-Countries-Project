@@ -6,8 +6,20 @@ import {Link} from "react-router-dom";
 import TablePagination from '@mui/material/TablePagination';
 import NumberFormat from 'react-number-format';
 import {useState} from "react";
+import Button from '@mui/material/Button';
+import { useDispatch } from 'react-redux';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+/*import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';*/
+
+import {addFavorite} from '../../Redux/action';
 
 function TableBody({countries}) {
+  const dispatch = useDispatch()
+   const addToFavorite = countryName =>{
+    dispatch(addFavorite(countryName))
+  }
+  
 
 const [page, setPage] = useState(0)
 const [rowsPerPage, setRowsPerPage] = useState(10)
@@ -19,10 +31,13 @@ const [rowsPerPage, setRowsPerPage] = useState(10)
   const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value)
     setPage(0)
-  }
+
+    }
 
   return (
-    <MuiTableBody width= "500">
+    
+     
+    <MuiTableBody width= "300" >
       {countries 
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map(country => {
@@ -38,12 +53,15 @@ const [rowsPerPage, setRowsPerPage] = useState(10)
         <TableCell>
           {country.capital ? country.capital.map(capitalName => <p key = {capitalName}>{capitalName}</p>) : "N/A"}
         </TableCell>
+        <TableCell>
+          <Button onClick={()=> addToFavorite(country.name.common)}><FavoriteIcon /></Button>
+        </TableCell>
        </TableRow>
         )
     })}
-<TablePagination
+  <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
-        component="div"
+        /*component="div"*/
         count={countries.length}
         rowsPerPage={rowsPerPage}
         page={page}

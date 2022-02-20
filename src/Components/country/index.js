@@ -37,8 +37,8 @@ function Countrypage() {
 
     <Box
       sx={{
-        width: '100%',
-        maxWidth: 650,
+        width: '90%',
+        maxWidth: 450,
         border: 1,
         
       }}
@@ -65,7 +65,7 @@ function Countrypage() {
               <AccordionDetails>
                  <Typography>
          {country.languages && Object.keys(country.languages).length >0 
-           ? Object.values(country.languages).map(value =><div><span  key={value} >{value}</span></div>): "N/A" }</Typography>
+           ? Object.values(country.languages).map(value =><span  key={value} >{value}</span>): "N/A" }</Typography>
            </AccordionDetails>
             </Accordion>
             </CardContent>
@@ -79,7 +79,7 @@ function Countrypage() {
            </AccordionSummary>
            <AccordionDetails>
              <Typography>
-         {(country.borders).map(borders =><div><span key={borders} >{borders}</span></div>)}</Typography>
+         {(country.borders).map(borders =><span key={borders} >{borders}</span>)}</Typography>
          </AccordionDetails>
          </Accordion>
            </CardContent>
@@ -93,13 +93,10 @@ function Countrypage() {
          <Typography>
           {country.currencies && Object.keys(country.currencies).length >0 
            ? Object.values(country.currencies).map((x) => x.name).join(','):"N/A" }</Typography>
-          
            </AccordionDetails>
            </Accordion>
         </CardContent>
-
         <CardActions>
-           
         </CardActions>
       </Card>
       </Box>

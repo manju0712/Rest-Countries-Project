@@ -13,19 +13,16 @@ import React from 'react'
   }
    return (
      <>
-       <div>
          <h1>Welcome </h1>
          <h2>Know your World Countries</h2>
-       </div>
-       <div>
        <SearchCon countries ={countries} />
-      </div>
-      <TableContainer> 
+      <TableContainer > 
       <Table>
         <TableHead />
         <TableBody countries ={countries} />
        </Table>
       </TableContainer>
+          
       </>
       )
  }

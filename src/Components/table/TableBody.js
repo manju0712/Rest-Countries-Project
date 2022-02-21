@@ -42,9 +42,10 @@ const [rowsPerPage, setRowsPerPage] = useState(10)
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map(country => {
         return(
-       <TableRow key ={country.name.common}>
-       <TableCell>
-        <img src = {country.flags.png}  alt= "flag" />
+       <TableRow key ={country.name.common} >
+      
+       <TableCell align="left" style={{ width: 200 }}>
+        <img src = {country.flags.png} style={{ width: "80px"}} alt= "flag" />
         </TableCell>
         <TableCell>
           <Link to= {"/country/" + country.name.common}>{country.name.common}</Link></TableCell>

@@ -3,9 +3,9 @@ import MuiTableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from  '@mui/material/TableCell';
 import {Link} from "react-router-dom";
-import TablePagination from '@mui/material/TablePagination';
+
 import NumberFormat from 'react-number-format';
-import {useState} from "react";
+
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -13,37 +13,40 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Box from '@mui/material/Box';*/
 
 import {addFavorite} from '../../Redux/action';
+import {Country} from "../../types"
 
-function TableBody({countries}) {
+
+
+
+
+type TableBodyProps ={
+  countries :Country[]
+}
+
+function TableBody({countries} :TableBodyProps) {
   const dispatch = useDispatch()
-   const addToFavorite = countryName =>{
+  
+   const addToFavorite = (countryName:string) =>{
     dispatch(addFavorite(countryName))
+    
+    
   }
+    const [flag, setFlag] = React.useState(true);
+
+  const handleClick = () => {
+    setFlag(!flag);
+  };
   
 
-const [page, setPage] = useState(0)
-const [rowsPerPage, setRowsPerPage] = useState(10)
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage)
-  }
-
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(+event.target.value)
-    setPage(0)
-
-    }
 
   return (
-    
-     
-    <MuiTableBody width= "300" >
+    <MuiTableBody sx = {{width : "300"}} >
       {countries 
-      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+     
       .map(country => {
         return(
        <TableRow key ={country.name.common} >
-      
        <TableCell align="left" style={{ width: 200 }}>
         <img src = {country.flags.png} style={{ width: "80px"}} alt= "flag" />
         </TableCell>
@@ -55,20 +58,13 @@ const [rowsPerPage, setRowsPerPage] = useState(10)
           {country.capital ? country.capital.map(capitalName => <p key = {capitalName}>{capitalName}</p>) : "N/A"}
         </TableCell>
         <TableCell>
-          <Button onClick={()=> addToFavorite(country.name.common)}><FavoriteIcon /></Button>
+          <Button  onClick={()=> {addToFavorite(country.name.common); handleClick()}} variant="contained"
+          color={flag ? "primary" : "secondary"}><FavoriteIcon /></Button>
         </TableCell>
        </TableRow>
         )
     })}
-  <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        /*component="div"*/
-        count={countries.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+ 
     </MuiTableBody>
   )
 }

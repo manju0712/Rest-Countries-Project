@@ -13,6 +13,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import { styled } from '@mui/material/styles'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFavorite } from '../../Redux/action'
+import {InitialState} from "../../Redux/store"
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
@@ -34,15 +35,17 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }))
 
 function Favorites() {
-  const favoriteCountries = useSelector(state => state.favoriteCountries)
+  const favoriteCountries = useSelector(
+    (state: InitialState) => state.favorites.favoriteCountries
+  )
   const dispatch = useDispatch()
-  const removeFromFavorite = countryName => {
+  const removeFromFavorite = (countryName :string)=> {
     dispatch(removeFavorite(countryName))
   }
 
   return (
     <>
-      <h1> Countries listed in the Favorites</h1>
+      <h1> Your favorite Country List</h1>
       <Link to="/">
         <HomeIcon />
       </Link>
@@ -53,7 +56,7 @@ function Favorites() {
           size="small"
           aria-label="simple table"
         >
-          {favoriteCountries.length === 0 && <h>Your favorite Country List is Empty Now</h>}
+          {favoriteCountries.length === 0 && <h1>Your favorite Country List is Empty Now</h1>}
           <TableBody>
             {favoriteCountries.map(country => (
               <StyledTableRow key={country}>

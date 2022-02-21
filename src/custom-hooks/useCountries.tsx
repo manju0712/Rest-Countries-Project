@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 
-const useCountries = () => {
- const [countries,setCountries] = useState([])
- const [error, setError] = useState(null)
+import {Country} from "../types"
+
+type Return = [Country[], Error | null]
+
+const useCountries = () :Return => {
+ const [countries,setCountries] = useState<Country[]>([])
+ const [error, setError] = useState<Error | null>(null)
 
    useEffect(() =>{
    const fetchCountries = async () =>{
@@ -13,7 +17,7 @@ const useCountries = () => {
        setCountries(data)
     }
     catch (error){
-      setError(error)
+      setError(error as Error)
     }
 
    }

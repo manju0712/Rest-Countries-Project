@@ -1,13 +1,19 @@
-import { ADD_FAVORITE ,REMOVE_FAVORITE} from "./action"
+/*import { Country } from "../../types"*/
+import { Actions, ADD_FAVORITE ,REMOVE_FAVORITE} from "../action"
 
-const initialState = {
+
+type InitState ={
+    favoriteCountries: string[]
+}
+
+const initialState :InitState= {
      favoriteCountries : [],
     
 }
 
         /*localStorage.setItem("countries",JSON.stringify(["1","2"]))*/
 
- const reducer = (state = initialState, action)  => {
+ const reducer = (state = initialState, action:Actions): InitState  => {
 
     switch (action.type) {
     case ADD_FAVORITE:

@@ -3,21 +3,14 @@ import MuiTableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from  '@mui/material/TableCell';
 import {Link} from "react-router-dom";
-
 import NumberFormat from 'react-number-format';
-
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 /*import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';*/
-
 import {addFavorite} from '../../Redux/action';
 import {Country} from "../../types"
-
-
-
-
 
 type TableBodyProps ={
   countries :Country[]
@@ -25,25 +18,18 @@ type TableBodyProps ={
 
 function TableBody({countries} :TableBodyProps) {
   const dispatch = useDispatch()
-  
-   const addToFavorite = (countryName:string) =>{
-    dispatch(addFavorite(countryName))
-    
-    
+  const addToFavorite = (countryName:string) =>{
+  dispatch(addFavorite(countryName))    
   }
-    const [flag, setFlag] = React.useState(true);
-
+  const [flag, setFlag] = React.useState(true);
   const handleClick = () => {
     setFlag(!flag);
   };
   
 
-
-
-  return (
+return (
     <MuiTableBody sx = {{width : "300"}} >
       {countries 
-     
       .map(country => {
         return(
        <TableRow key ={country.name.common} >

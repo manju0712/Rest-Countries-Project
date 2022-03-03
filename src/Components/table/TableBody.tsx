@@ -5,7 +5,8 @@ import TableCell from  '@mui/material/TableCell';
 import {Link} from "react-router-dom";
 import NumberFormat from 'react-number-format';
 import Button from '@mui/material/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector} from 'react-redux';
+import {InitialState} from "../../Redux/store"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 /*import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';*/
@@ -18,19 +19,25 @@ type TableBodyProps ={
 
 function TableBody({countries} :TableBodyProps) {
   const dispatch = useDispatch()
+ const favoriteCountries = useSelector(
+    (state: InitialState) => state.favorites.favoriteCountries
+  )
   const addToFavorite = (countryName:string) =>{
   dispatch(addFavorite(countryName))    
   }
+  
   const [flag, setFlag] = React.useState(true);
-  const handleClick = () => {
-    setFlag(!flag);
+  const handleClick = (countryName: string) => {
+    /*const count = countries.filter((count)=>count.name === countryName);*/
+
+    setFlag(count=>!flag); 
   };
   
 
 return (
     <MuiTableBody sx = {{width : "300"}} >
       {countries 
-      .map(country => {
+      .map((country,index) => {
         return(
        <TableRow key ={country.name.common} >
        <TableCell align="left" style={{ width: 200 }}>
@@ -44,8 +51,12 @@ return (
           {country.capital ? country.capital.map(capitalName => <p key = {capitalName}>{capitalName}</p>) : "N/A"}
         </TableCell>
         <TableCell>
-          <Button  onClick={()=> {addToFavorite(country.name.common); handleClick()}} variant="contained"
-          color={flag ? "primary" : "secondary"}><FavoriteIcon /></Button>
+          <Button key={index} onClick={()=> {addToFavorite(country.name.common); handleClick(country.name.common)}} ><FavoriteIcon 
+          style={{
+                          color: favoriteCountries.includes(country.name.common)
+                            ? "red"
+                            : "black",
+                        }}/></Button>
         </TableCell>
        </TableRow>
         )

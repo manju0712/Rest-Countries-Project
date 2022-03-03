@@ -3,6 +3,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import {useContext} from "react";
+
 import { ThemeContext } from "../../App";
 import ThemeToggle from "../ThemeToggle"
 
@@ -37,7 +38,7 @@ import { AppTheme } from "../../AppTheme";
   }
    return (
      <div style={themeStyle}>
-         <h1>Welcome<span>[{theme}]</span> </h1>
+         <h1>Welcome </h1>
          <ThemeToggle />
          <h2>Know your World Countries</h2>
       
@@ -46,7 +47,7 @@ import { AppTheme } from "../../AppTheme";
         <TableHead />
         <TableBody countries ={countries} />
        </Table>
-       <ThemeToggle />
+     
       </TableContainer>
           
       </div>

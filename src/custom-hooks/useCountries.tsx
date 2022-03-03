@@ -19,9 +19,7 @@ const useCountries = () :Return => {
     catch (error){
       setError(error as Error)
     }
-
    }
-
     fetchCountries()
    },[])
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
 import DeleteIcon from '@mui/icons-material/Delete'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -14,6 +13,10 @@ import { styled } from '@mui/material/styles'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFavorite } from '../../Redux/action'
 import {InitialState} from "../../Redux/store"
+import {useContext} from "react";
+import { ThemeContext } from "../../App";
+import ThemeToggle from "../ThemeToggle"
+import { AppTheme } from '../../AppTheme';
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
@@ -35,6 +38,26 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }))
 
 function Favorites() {
+
+const {theme} = useContext(ThemeContext);
+  const headerStyle: AppTheme = {
+        dark: {
+            backgroundColor: 'lightblue',
+            color: 'white',
+        },
+        light: {
+            backgroundColor: '#e0e0e0',
+            color: 'black',
+        },
+        common: {
+            transition: 'all 1s ease',
+        }
+    };
+    const themeStyle = {
+        ...(theme === 'light' ? headerStyle.light : headerStyle.dark),
+        ...headerStyle.common,
+    };
+
   const favoriteCountries = useSelector(
     (state: InitialState) => state.favorites.favoriteCountries
   )
@@ -44,19 +67,21 @@ function Favorites() {
   }
 
   return (
-    <>
-      <h1> Your favorite Country List</h1>
+   
+    <div style={themeStyle}>
+     <h1> Your favorite Country List</h1>
       <Link to="/">
         <HomeIcon />
       </Link>
-      <p></p>
+    <ThemeToggle />
       <TableContainer component={Paper}>
         <Table
           sx={{ Width: 400, margin: 'auto' }}
           size="small"
           aria-label="simple table"
+          style={themeStyle}
         >
-          {favoriteCountries.length === 0 && <h1>Your favorite Country List is Empty Now</h1>}
+          {favoriteCountries.length === 0 && <p>Your favorite Country List is Empty Now</p>}
           <TableBody>
             {favoriteCountries.map(country => (
               <StyledTableRow key={country}>
@@ -64,9 +89,7 @@ function Favorites() {
                   component="th"
                   scope="row"
                   align="center"
-                  colSpan={1}
-                >
-                  {country}
+                  colSpan={1}>{country}                 
                 </StyledTableCell>
 
                 <StyledTableCell>
@@ -77,8 +100,10 @@ function Favorites() {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+       </div>
+  
   )
+ 
 }
 
 export default Favorites

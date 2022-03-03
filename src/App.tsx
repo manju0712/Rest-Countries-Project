@@ -21,16 +21,18 @@ function App() {
   const [theme,setTheme] = useState("light")
 
   return (
+     <div className= 'App'>
     <ThemeContext.Provider value={{theme,setTheme}}>
-    <div className= 'App'>
+   
       
       <Routes>
         <Route path = "/" element={<CountryTable />}/>
         <Route path ="/country/:name" element={<CountryPage />}/>
         <Route path ="/Favorites" element={<Favorites />}/>
       </Routes>
-    </div>
+    
     </ThemeContext.Provider>
+    </div>
   )
 }
 export default App;

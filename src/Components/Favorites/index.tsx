@@ -11,8 +11,8 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell'
 import HomeIcon from '@mui/icons-material/Home'
 import { styled } from '@mui/material/styles'
 import { useSelector, useDispatch } from 'react-redux'
-import { removeFavorite } from '../../Redux/action'
-import {InitialState} from "../../Redux/store"
+import { removeFavorite } from '../../Redux/action/favoriteA'
+import {InitialAllState} from "../../Redux/store"
 import {useContext} from "react";
 import { ThemeContext } from "../../App";
 import ThemeToggle from "../ThemeToggle"
@@ -37,6 +37,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }))
 
+
+
+
 function Favorites() {
 
 const {theme} = useContext(ThemeContext);
@@ -59,7 +62,7 @@ const {theme} = useContext(ThemeContext);
     };
 
   const favoriteCountries = useSelector(
-    (state: InitialState) => state.favorites.favoriteCountries
+    (state: InitialAllState) => state.favCountries.favoriteCountries
   )
   const dispatch = useDispatch()
   const removeFromFavorite = (countryName :string)=> {

@@ -6,38 +6,37 @@ import {Link} from "react-router-dom";
 import NumberFormat from 'react-number-format';
 import Button from '@mui/material/Button';
 import { useDispatch,useSelector} from 'react-redux';
-import {InitialState} from "../../Redux/store"
+/*import {InitialState} from "../../Redux/store"*/
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import {InitialAllState} from "../../Redux/store"
 /*import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';*/
-import {addFavorite} from '../../Redux/action';
+import {addFavorite} from '../../Redux/action/favoriteA';
 import {Country} from "../../types"
 
-type TableBodyProps ={
-  countries :Country[]
+export type TableBodyTypes = {
+  filteredCountries: Country[]
 }
 
-function TableBody({countries} :TableBodyProps) {
+function TableBody({ filteredCountries }: TableBodyTypes) {
   const dispatch = useDispatch()
  const favoriteCountries = useSelector(
-    (state: InitialState) => state.favorites.favoriteCountries
+    (state: InitialAllState) => state.favCountries.favoriteCountries
   )
-  const addToFavorite = (countryName:string) =>{
-  dispatch(addFavorite(countryName))    
+  const addToFavorite = (countryName: string) => {
+    dispatch(addFavorite(countryName))
   }
-  
-  const [flag, setFlag] = React.useState(true);
+   const [flag, setFlag] = React.useState(true);
   const handleClick = (countryName: string) => {
     /*const count = countries.filter((count)=>count.name === countryName);*/
 
     setFlag(count=>!flag); 
   };
-  
 
 return (
     <MuiTableBody sx = {{width : "300"}} >
-      {countries 
-      .map((country,index) => {
+      {filteredCountries 
+      .map((country: Country) => {
         return(
        <TableRow key ={country.name.common} >
        <TableCell align="left" style={{ width: 200 }}>
@@ -51,7 +50,7 @@ return (
           {country.capital ? country.capital.map(capitalName => <p key = {capitalName}>{capitalName}</p>) : "N/A"}
         </TableCell>
         <TableCell>
-          <Button key={index} onClick={()=> {addToFavorite(country.name.common); handleClick(country.name.common)}} ><FavoriteIcon 
+         <Button onClick={()=> {addToFavorite(country.name.common); handleClick(country.name.common)}} ><FavoriteIcon 
           style={{
                           color: favoriteCountries.includes(country.name.common)
                             ? "red"

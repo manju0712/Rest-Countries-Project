@@ -12,7 +12,7 @@ import ThemeToggle from "../ThemeToggle"
 
 
 import { fetchAllCountries } from '../../Redux/action/countriesA'
-import AppBar from '../Appbar'
+/*import AppBar from '../Appbar'*/
 import { InitialAllState } from '../../Redux/store'
 import { Country } from "../../types"
 import React from 'react'
@@ -69,7 +69,7 @@ import { AppTheme } from "../../AppTheme";
           <h1>Welcome </h1>
          <ThemeToggle />
          <h2>Know your World Countries</h2>
-      <AppBar />
+     
 
       <SearchBar onChange={searchHandler} />
       

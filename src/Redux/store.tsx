@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import { Country } from '../types'
-import rootReducer from "../Redux/reducers/rootReducer"
+import rootReducer from "./reducers/rootReducer"
 
 export type InitialAllState = {
   favCountries: {
@@ -35,6 +35,12 @@ const createReduxStore = () => {
     initialState,
     composeWithDevTools(applyMiddleware(thunk))
   )
+   store.subscribe(() => {
+    const currentState = store.getState()
+    console.log('state', currentState)
+    const favoriteList = currentState.favCountries.favoriteCountries
+    localStorage.setItem('countries', JSON.stringify(favoriteList))
+  })
   return store
 }
 export default createReduxStore

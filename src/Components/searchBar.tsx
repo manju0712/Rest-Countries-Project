@@ -1,5 +1,5 @@
 import React from 'react'
-import './AppBar.css'
+
 type searchBarType = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }

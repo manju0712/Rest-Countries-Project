@@ -1,11 +1,11 @@
-import { Actions, ADD_FAVORITE, REMOVE_FAVORITE } from './action'
+import { Actions, ADD_FAVORITE, REMOVE_FAVORITE } from "../action/favoriteA"
 
 // favorite country name is string
 type InitState = {
   favoriteCountries: string[]
 }
 //countries list error in inital sate in store so type
-const initialState: InitState = {
+export const initialState: InitState = {
   favoriteCountries: [],
 }
 //localStorage.setItem('countries', JSON.stringify(favoriteList))

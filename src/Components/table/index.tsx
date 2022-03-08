@@ -10,7 +10,7 @@ import { useEffect } from 'react'
 import { ThemeContext } from "../../App";
 import ThemeToggle from "../ThemeToggle"
 
-
+import CountryList from '../../Components/sorting/CountryList'
 import { fetchAllCountries } from '../../Redux/action/countriesA'
 /*import AppBar from '../Appbar'*/
 import { InitialAllState } from '../../Redux/store'
@@ -70,14 +70,15 @@ import { AppTheme } from "../../AppTheme";
          <ThemeToggle />
          <h2>Know your World Countries</h2>
      
-
+     
       <SearchBar onChange={searchHandler} />
-      
+      <CountryList/>
 
       <TableContainer component={Box}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="simple table">
           <TableHead />
           <TableBody filteredCountries={filteredCountries} />
+          
         </Table>
       </TableContainer>
     </div>
